@@ -1,7 +1,7 @@
 <img align="centre" style="padding-left:100px;" src="https://static-cdn.jtvnw.net/twitch-event-images-v2/84776231-3405-4895-9f8c-2306d9b9422f-320x180">
 
 # BATTLESNAKE 2019 - Expected competition bracket (Intermediate)
-## A BattleSnake competition AI written by Tristan!
+## A BattleSnake competition AI
 ## (Written with ❤️, Python, gUnicorn, and Flask!)
 
 To run this AI:
