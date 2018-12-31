@@ -3,7 +3,7 @@ class Setup():
         self.name = "Setup Functions"
 
     #NOTE performs grid setup for each move
-    def grid_setup(data):
+    def grid_setup(self, data):
 
         # Get the information held in the data object
         food = data.get("food").get("data")
@@ -42,13 +42,13 @@ class Setup():
                 right = head_x + 1
 
                 if top > 0:
-                    move_grid[top][head_x] = 0
+                    move_grid[top][head_x] = -1
                 if bottom < height:
-                    move_grid[bottom][head_x] = 0
+                    move_grid[bottom][head_x] = -1
                 if left > 0:
-                    move_grid[head_y][left] = 0
+                    move_grid[head_y][left] = -1
                 if right < width:
-                    move_grid[head_y][right] = 0
+                    move_grid[head_y][right] = -1
 
             for point in body:
                 move_grid[point.get("y")][point.get("x")] = 0

@@ -1,7 +1,10 @@
 class Helper():
 
+    def __init__(self):
+        self.name = "helper methods"
+
     #NOTE returns a position tuple of closest food pellet
-    def get_closest_food(food_list, date):
+    def get_closest_food(self, food_list, date):
         head_x = data.get("you").get("body").get("data")[0].get("x")
         head_y = data.get("you").get("body").get("data")[0].get("y")
 
@@ -13,12 +16,12 @@ class Helper():
                 target_position = pellet
         return tuple(target_position)
 
-    def get_crows_dist(start, end):
+    def get_crows_dist(self, start, end):
         (x1, y1) = start
         (x2, y2) = end
         return abs(math.hypot(x2 - x1, y2 - y1))
 
-    def get_move_letter(start, end):
+    def get_move_letter(self, start, end):
         current_x = start[0]
         current_y = start[1]
         next_x = end[0]
@@ -33,3 +36,11 @@ class Helper():
             return 'left'
         elif delta_y < 0:
             return 'up'
+
+    def get_neighbors(self, node, lines, height, width):
+        (x, y) = node #changed from x, y
+        return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
+
+    def get_last_resort(self, node, lines, height, width):
+        (x, y) = node #changed from x, y
+        return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and (lines[ny][nx] == 1 or lines[ny][nx] == -1)]
