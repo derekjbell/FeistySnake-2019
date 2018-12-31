@@ -19,29 +19,33 @@ class State_Grow():
     def get_move(self, grid_data, data):
         self.height = data.get("height")
         self.width = data.get("width")
-        self.pathfinder = AStar(grid_data[0], self.width, self.height)
-        self.grid_data = grid_data
-        self.data = data
         self.head_x = data.get("you").get("body").get("data")[0].get("x")
         self.head_y = data.get("you").get("body").get("data")[0].get("y")
+        self.my_snake_health = data.get("you").get("health")
+        self.my_snake_length = data.get("you").get("length")
+        self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
+        self.grid_data = grid_data
+        self.data = data
 
         move = move_to_food()
 
         #NOTE FIND TAIL MODE
-        if len(mySnake) > 3 and myHealth > 75 or move == None: #85
-            gonnaGrow = False
-            if myHealth == 100:
-                gonnaGrow = True
-            move = chase_tail(gonnaGrow)
+        # if self.my_snake_length > 3 and self.my_snake_health > 75 or move == None: #85
+        #     move = chase_tail(self.my_snake_health == 100)
 
         if move:
             return move
         else:
-            neighbours = Helper.get_neighbors((head_x, head_y), grid_data[0], height, width)
-            if neighbours:
-                return Helper.get_move_letter((head_x, head_y), neighbours[0])
+            move = chase_tail(self.my_snake_health == 100)
+            if move:
+                return move
             else:
-                return 'left'
+                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), grid_data[0], self.height, self.width)
+                if neighbours:
+                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+                else:
+                    # Snake will almost certainly die
+                    return 'up'
 
 
     def move_to_food(self):
@@ -66,9 +70,9 @@ class State_Grow():
         self.grid_data[0][my_tail[1]][my_tail[0]] = 0
         if path:
             if not isGonnaGrow:
-                return get_move_letter((head_x, head_y), list(path)[1])
+                return get_move_letter((self.head_x, self.head_y), list(path)[1])
             else:
-                neighbours = Helper.get_neighbors(my_tail, grid_options[0], self.height, self.width)
+                neighbours = Helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
                 for neighbour in neighbours:
                     path = self.pathfinder.compute_path((self.head_x, self.head_y), neighbour)
                     if path:

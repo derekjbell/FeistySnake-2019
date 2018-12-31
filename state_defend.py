@@ -3,16 +3,6 @@ from helper import Helper
 
 class State_Defend():
 
-    # width = data.get("width")
-    # height = data.get("height")
-    # food = data.get("food").get("data") #Array
-    # snakes = data.get("snakes").get("data") #Array
-    # you = data.get("you")
-    # myHealth = you.get("health")
-    # myLength = you.get("body").get("length")
-    # mySnake = you.get("body").get("data")
-    # myID = you.get("id")
-
     def __init__(self):
         self.name = "defend state"
         self.helper = Helper()
@@ -28,15 +18,11 @@ class State_Defend():
         self.grid_data = grid_data
         self.data = data
 
-
         move = self.move_to_food()
 
         #NOTE FIND TAIL MODE
-        if self.my_snake_length > 3 and self.my_snake_health > 75 or move == None: #85# if self.data.get("you").get("body").get("length") > 3 and self.my_snake_health > 75 or move == None: #85
-            gonnaGrow = False
-            if self.my_snake_health == 100:
-                gonnaGrow = True
-            move = self.chase_tail(gonnaGrow)
+        if self.my_snake_length > 3 and self.my_snake_health > 65 or move == None:
+            move = self.chase_tail(self.my_snake_health == 100)
 
         if move:
             return move
@@ -45,10 +31,12 @@ class State_Defend():
             if neighbours:
                 return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
             else:
+                # All spots around the head are full, or are next to an opponents head
                 neighbours = self.helper.get_last_resort((self.head_x, self.head_y), grid_data[0], self.height, self.width)
                 if neighbours:
                     return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
                 else:
+                    # Snake will almost certainly die
                     return 'up'
 
 
@@ -67,13 +55,13 @@ class State_Defend():
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         return None
 
-    def chase_tail(self, isGonnaGrow):
+    def chase_tail(self, snake_growing):
         my_tail = (self.data.get("you").get("body").get("data")[-1].get("x"), self.data.get("you").get("body").get("data")[-1].get("y"))
         self.grid_data[0][my_tail[1]][my_tail[0]] = 1
         path = self.pathfinder.compute_path(my_tail)
         self.grid_data[0][my_tail[1]][my_tail[0]] = 0
         if path:
-            if not isGonnaGrow:
+            if not snake_growing:
                 return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
             else:
                 neighbours = self.helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
