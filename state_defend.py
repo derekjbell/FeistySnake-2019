@@ -20,11 +20,12 @@ class State_Defend():
     def get_move(self, grid_data, data):
         self.height = data.get("height")
         self.width = data.get("width")
-        self.pathfinder = AStar(grid_data[0], self.width, self.height)
-        self.grid_data = grid_data
-        self.data = data
         self.head_x = data.get("you").get("body").get("data")[0].get("x")
         self.head_y = data.get("you").get("body").get("data")[0].get("y")
+        self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
+        self.grid_data = grid_data
+        self.data = data
+
 
         move = move_to_food()
 
