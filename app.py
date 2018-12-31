@@ -19,6 +19,7 @@ app = Flask(__name__) #App is now an instance of Flask.
 
 @app.route("/start", methods=["POST"])
 def start():
+    print("Starting start method")
     data = request.get_json()
 
     global height
