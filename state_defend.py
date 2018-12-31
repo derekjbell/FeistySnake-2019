@@ -27,14 +27,14 @@ class State_Defend():
         self.data = data
 
 
-        move = move_to_food()
+        move = self.move_to_food()
 
         #NOTE FIND TAIL MODE
         if len(mySnake) > 3 and myHealth > 75 or move == None: #85
             gonnaGrow = False
             if myHealth == 100:
                 gonnaGrow = True
-            move = chase_tail(gonnaGrow)
+            move = self.chase_tail(gonnaGrow)
 
         if move:
             return move
