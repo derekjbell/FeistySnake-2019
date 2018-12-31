@@ -27,12 +27,12 @@ class State_Defend():
         if move:
             return move
         else:
-            neighbours = self.helper.get_neighbors((self.head_x, self.head_y), grid_data[0], self.height, self.width)
+            neighbours = self.helper.get_neighbors((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
             if neighbours:
                 return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
             else:
                 # All spots around the head are full, or are next to an opponents head
-                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), grid_data[0], self.height, self.width)
+                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
                 if neighbours:
                     return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
                 else:
