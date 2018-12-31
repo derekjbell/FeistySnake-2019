@@ -15,6 +15,7 @@ class State_Defend():
 
     def __init__(self):
         self.name = "defend state"
+        self.helper = Helper()
 
     def get_move(self, grid_data, data):
         self.height = data.get("height")
@@ -37,9 +38,9 @@ class State_Defend():
         if move:
             return move
         else:
-            neighbours = Helper.get_neighbors((head_x, head_y), grid_data[0], height, width)
+            neighbours = self.helper.get_neighbors((head_x, head_y), grid_data[0], height, width)
             if neighbours:
-                return Helper.get_move_letter((head_x, head_y), neighbours[0])
+                return self.helper.get_move_letter((head_x, head_y), neighbours[0])
             else:
                 return 'left'
 
@@ -56,7 +57,7 @@ class State_Defend():
                     current_minimum = len(path)
                     current_path = path
         if current_path:
-            return Helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
+            return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         return None
 
     def chase_tail(self, isGonnaGrow):
@@ -68,9 +69,9 @@ class State_Defend():
             if not isGonnaGrow:
                 return get_move_letter((head_x, head_y), list(path)[1])
             else:
-                neighbours = Helper.get_neighbors(my_tail, grid_options[0], self.height, self.width)
+                neighbours = self.helper.get_neighbors(my_tail, grid_options[0], self.height, self.width)
                 for neighbour in neighbours:
                     path = self.pathfinder.compute_path((self.head_x, self.head_y), neighbour)
                     if path:
-                        return Helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
+                        return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
         return None
