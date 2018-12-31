@@ -24,7 +24,10 @@ def start():
     global height
     global width
     global game_id
-    global state = State_Defend
+    global defend = State_Defend
+    global attack = State_Attack
+    global grow = State_Grow
+    global state = defend
 
     return jsonify( color = "#E0FFFF", secondary_color = "#000000", name = "FeistySnake", taunt = "Mess with Snekko, better run like hecko", head_type = "shades", tail_type = "freckled", head_url = "https://todaysmusings.files.wordpress.com/2008/05/raccoon.jpg?w=229&h=300")
 
