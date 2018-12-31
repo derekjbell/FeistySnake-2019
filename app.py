@@ -48,7 +48,7 @@ def move():
     data = request.get_json()
 
     #NOTE grid_data[0] = move_grid // grid_data[1] = food_grid
-    grid_data = Setup.grid_setup(data) #(food, width, height, snakes, myID)
+    grid_data = Setup().grid_setup(data) #(food, width, height, snakes, myID)
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)
