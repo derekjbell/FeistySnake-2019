@@ -34,7 +34,7 @@ def move():
     attack = State_Attack()
     grow = State_Grow()
 
-    state = attack
+    state = defend
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)

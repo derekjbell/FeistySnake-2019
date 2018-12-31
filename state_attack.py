@@ -23,7 +23,18 @@ class State_Attack():
         snakes = data.get("snakes").get("data")
         head = (self.head_x, self.head_y)
         # find closest snake
-        target_snake_id = self.path_to_head(snakes, head)
+        target_snake_id = self.path_to_head(snakes)
+        if self.my_snake_health < 30:
+            move = self.move_to_food(self.grid_data[1])
+            if move:
+                return move
+            else:
+                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
+                if neighbours:
+                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+                else:
+                    # Snake will almost certainly die
+                    return 'up'
 
         if target_snake_id:
             target_snake = None
@@ -35,12 +46,9 @@ class State_Attack():
                     target_position = self.get_target_position(target_snake)
                     return self.move_to_food([target_position], head)
         else:
-            move = self.move_to_food()
+            move = self.move_to_food(self.grid_data[1])
 
             #NOTE FIND TAIL MODE
-            if self.my_snake_length > 3 and self.my_snake_health > 65 or move == None:
-                move = self.chase_tail(self.my_snake_health == 100)
-
             if move:
                 return move
             else:
@@ -63,7 +71,7 @@ class State_Attack():
         target_y = 2*delta_y + target_snake[0].get("y")
         return (target_x, target_y)
 
-    def path_to_head(self, snakes, head):
+    def path_to_head(self, snakes):
         current_minimum = float('inf')
         current_path = None
         current_id = None
@@ -78,7 +86,7 @@ class State_Attack():
                 current_id = snake.get("id")
         return current_id
 
-    def move_to_food(self, food_list, head):
+    def move_to_food(self, food_list):
         current_minimum = float('inf')
         current_path = None
         for food in food_list:
