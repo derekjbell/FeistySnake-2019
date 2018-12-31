@@ -26,7 +26,8 @@ def move():
     data = request.get_json()
 
     #NOTE grid_data[0] = move_grid // grid_data[1] = food_grid
-    grid_data = Setup().grid_setup(data) #(food, width, height, snakes, myID)
+    setup_process = Setup()
+    grid_data = setup_process.grid_setup(data) #(food, width, height, snakes, myID)
 
     # Game States
     defend = State_Defend()
