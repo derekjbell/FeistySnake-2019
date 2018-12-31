@@ -21,7 +21,7 @@ class AStar():
         self.width = width
 
     #NOTE This is a node representing a square on the grid
-    class searchNode():
+    class search_node():
         def __init__(self, position, fscore=infinity, gscore=infinity, parent=None):
             self.fscore = fscore
             self.gscore = gscore
@@ -33,9 +33,9 @@ class AStar():
             return self.fscore < comparator.fscore
 
     #NOTE Method to create and retrieve search nodes
-    class searchNodeMaker(dict):
+    class search_node_maker(dict):
         def __missing__(self, node):
-            newNode = AStar.searchNode(node)
+            newNode = AStar.search_node(node)
             self.__setitem__(node, newNode)
             return newNode
 
@@ -59,27 +59,27 @@ class AStar():
         path.append(self.start)
         return list(reversed(path))
 
-    def computePath(self, end):
+    def compute_path(self, end):
         #NOTE list of nodes to check
         openList = []
-        currentSearchNode = AStar.searchNode(self.start, fscore=self.get_heuristic(end), gscore=0)
-        nodeMaker = AStar.searchNodeMaker()
-        heapq.heappush(openList, currentSearchNode)
+        current_search_node = AStar.search_node(self.start, fscore=self.get_heuristic(end), gscore=0)
+        node_maker = AStar.search_node_maker()
+        heapq.heappush(openList, current_search_node)
         #NOTE List of nodes that have been checked
         closedList = []
         while openList:
             #NOTE Pop the lowest fscore (to-go + been from or gScore + hScore) and set it as current
-            currentSearchNode = heapq.heappop(openList)
+            current_search_node = heapq.heappop(openList)
             #NOTE If it's the end, reconstruct the path
-            if currentSearchNode.position == end:
-                return self.get_path(currentSearchNode)
+            if current_search_node.position == end:
+                return self.get_path(current_search_node)
             else:
                 #NOTE Append the current node to the closed list (It's checked, and will have it's neighbours checked) and get the neighbours
-                closedList.append(currentSearchNode)
-                neighbours = [nodeMaker[tocheck] for tocheck in self.get_node_neighbours(currentSearchNode.position)]
+                closedList.append(current_search_node)
+                neighbours = [node_maker[tocheck] for tocheck in self.get_node_neighbours(current_search_node.position)]
                 for neighbour in neighbours:
                     #NOTE the score of this neighbour is the current gScore + 1
-                    newGscore = currentSearchNode.gscore + 1
+                    newGscore = current_search_node.gscore + 1
                     #NOTE If not been checked and it's gScore score is more than just 1 move, remove it from the open list
                     if neighbour in openList and newGscore < neighbour.gscore:
                         openList.remove(neighbour)
@@ -90,7 +90,7 @@ class AStar():
                     if neighbour not in openList and neighbour not in closedList:
                         neighbour.gscore = newGscore
                         neighbour.fscore = neighbour.gscore + self.get_heuristic(neighbour.position)
-                        neighbour.parent = currentSearchNode
+                        neighbour.parent = current_search_node
                         heapq.heappush(openList, neighbour)
                     heapq.heapify(openList)
         #NOTE No path was found, return none

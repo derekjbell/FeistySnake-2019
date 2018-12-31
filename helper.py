@@ -33,3 +33,7 @@ class Helper():
             return 'left'
         elif delta_y < 0:
             return 'up'
+            
+    def get_neighbors(node, lines, height, width):
+        (x, y) = node #changed from x, y
+        return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]

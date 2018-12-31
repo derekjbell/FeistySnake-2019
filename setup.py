@@ -3,7 +3,7 @@ class Setup():
         self.name = "Setup Functions"
 
     #NOTE performs grid setup for each move
-    def grid_setup(data):
+    def grid_setup(self, data):
 
         # Get the information held in the data object
         food = data.get("food").get("data")
