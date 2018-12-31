@@ -99,11 +99,7 @@ class AStar():
 
 if __name__ == '__main__':
     start = timer()
-    test_grid = [[1,0,1,1,1],
-            [1,0,1,0,1],
-            [1,0,1,0,1],
-            [1,0,1,0,1],
-            [1,1,1,0,1]]
+    test_grid = [[1,0,1,1,1], [1,0,1,0,1], [1,0,1,0,1], [1,0,1,0,1], [1,1,1,0,1]]
 
     #NOTE Usage is AStar(StartPointTuple, GridMatrix, HeightUnits, WidthUnits).computePath(EndPointTuple)
     path = AStar((0,0), test_grid, 5, 5).computePath((4, 4))
