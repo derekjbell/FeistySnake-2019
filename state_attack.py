@@ -24,7 +24,8 @@ class State_Attack():
         head = (self.head_x, self.head_y)
         # find closest snake
         target_snake_id = self.path_to_head(snakes)
-        if self.my_snake_health < 30:
+        
+        if self.my_snake_health < 40:
             move = self.move_to_food(self.grid_data[1])
             if move:
                 return move
