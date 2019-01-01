@@ -44,7 +44,7 @@ class State_Attack():
                     target_snake = snake.get("body").get("data")
 
                     target_position = self.get_target_position(target_snake)
-                    return self.move_to_food([target_position], head)
+                    return self.move_to_food([target_position])
         else:
             move = self.move_to_food(self.grid_data[1])
 
@@ -98,7 +98,7 @@ class State_Attack():
                     current_path = path
         if current_path and len(current_path) > 1:
             #TODO figure out how to stop two competing SNAKES from trying to take the same square
-            return self.helper.get_move_letter(head, list(current_path)[1])
+            return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         else:
             neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
             if neighbours:
