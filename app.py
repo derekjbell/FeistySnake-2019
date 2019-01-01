@@ -19,17 +19,6 @@ app = Flask(__name__) #App is now an instance of Flask.
 
 @app.route("/start", methods=["POST"])
 def start():
-<<<<<<< HEAD
-    global height
-    global width
-    global game_id
-    global defend = State_Defend
-    global attack = State_Attack
-    global grow = State_Grow
-    global state = defend
-
-=======
->>>>>>> 7a13cc00713d989085758a457615a2046d42d44f
     return jsonify( color = "#E0FFFF", secondary_color = "#000000", name = "FeistySnake", taunt = "Mess with Snekko, better run like hecko", head_type = "shades", tail_type = "freckled", head_url = "https://todaysmusings.files.wordpress.com/2008/05/raccoon.jpg?w=229&h=300")
 
 @app.route("/move", methods=["POST"])
@@ -45,7 +34,7 @@ def move():
     attack = State_Attack()
     grow = State_Grow()
 
-    state = defend
+    state = attack
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)
