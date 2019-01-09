@@ -6,10 +6,10 @@ class Setup():
     def grid_setup(self, data):
 
         # Get the information held in the data object
-        food = data.get("food").get("data")
-        width = data.get("width")
-        height = data.get("height")
-        snakes = data.get("snakes").get("data")
+        food = data.get("board").get("food")
+        width = data.get("board").get("width")
+        height = data.get("board").get("height")
+        snakes = data.get("board").get("snakes")
         my_snake_id = data.get("you").get("id")
 
         # Holds information about the map and where the snake can move
@@ -27,7 +27,7 @@ class Setup():
 
         #Snake locations:
         for snake in snakes:
-            body = snake.get("body").get("data")
+            body = snake.get("body")
             snake_id = snake.get("id")
             if snake_id != my_snake_id:
                 # If snake is an enedata.get("you").get("body").get("data")[0].get("x")my, create a "Danger Zone" around the

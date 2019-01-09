@@ -10,21 +10,21 @@ class State_Attack():
         self.helper = Helper()
 
     def get_move(self, grid_data, data):
-        self.height = data.get("height")
-        self.width = data.get("width")
-        self.head_x = data.get("you").get("body").get("data")[0].get("x")
-        self.head_y = data.get("you").get("body").get("data")[0].get("y")
+        self.height = data.get("board").get("height")
+        self.width = data.get("board").get("width")
+        self.head_x = data.get("you").get("body")[0].get("x")
+        self.head_y = data.get("you").get("body")[0].get("y")
         self.my_snake_health = data.get("you").get("health")
-        self.my_snake_length = data.get("you").get("length")
+        self.my_snake_length = len(data.get("you").get("body"))
         self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
         self.grid_data = grid_data
         self.data = data
 
-        snakes = data.get("snakes").get("data")
+        snakes = data.get("board").get("snakes")
         head = (self.head_x, self.head_y)
         # find closest snake
         target_snake_id = self.path_to_head(snakes)
-        
+
         if self.my_snake_health < 40:
             move = self.move_to_food(self.grid_data[1])
             if move:
@@ -42,7 +42,7 @@ class State_Attack():
             # Find target snake data
             for snake in snakes:
                 if snake.get("id") == target_snake_id:
-                    target_snake = snake.get("body").get("data")
+                    target_snake = snake.get("body")
 
                     target_position = self.get_target_position(target_snake)
                     return self.move_to_food([target_position])
@@ -79,8 +79,8 @@ class State_Attack():
         for snake in snakes:
             if snake.get("id") == self.data.get("you").get("id"):
                 continue
-            enemy_head_x = snake.get("body").get("data")[0].get("x")
-            enemy_head_y = snake.get("body").get("data")[0].get("y")
+            enemy_head_x = snake.get("body")[0].get("x")
+            enemy_head_y = snake.get("body")[0].get("y")
             dist = self.helper.get_crows_dist((self.head_x, self.head_y), (enemy_head_x, enemy_head_y))
             if dist < current_minimum:
                 current_minimum = dist

@@ -17,12 +17,12 @@ class State_Grow():
         self.name = "grow state"
 
     def get_move(self, grid_data, data):
-        self.height = data.get("height")
-        self.width = data.get("width")
-        self.head_x = data.get("you").get("body").get("data")[0].get("x")
-        self.head_y = data.get("you").get("body").get("data")[0].get("y")
+        self.height = data.get("board").get("height")
+        self.width = data.get("board").get("width")
+        self.head_x = data.get("you").get("body")[0].get("x")
+        self.head_y = data.get("you").get("body")[0].get("y")
         self.my_snake_health = data.get("you").get("health")
-        self.my_snake_length = data.get("you").get("length")
+        self.my_snake_length = len(data.get("you").get("body"))
         self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
         self.grid_data = grid_data
         self.data = data
@@ -64,7 +64,7 @@ class State_Grow():
         return None
 
     def chase_tail(self, isGonnaGrow):
-        my_tail = (self.data.get("you").get("body").get("data")[-1].get("x"), self.data.get("you").get("body").get("data")[-1].get("y"))
+        my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
         self.grid_data[0][my_tail[1]][my_tail[0]] = 1
         path = self.pathfinder.compute_path((self.head_x, self.head_y), my_tail)
         self.grid_data[0][my_tail[1]][my_tail[0]] = 0
