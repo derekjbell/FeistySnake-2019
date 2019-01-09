@@ -25,6 +25,7 @@ class State_Attack():
         # find closest snake
         target_snake_id = self.path_to_head(snakes)
 
+        # Guard to make sure our snake doesn't just starve
         if self.my_snake_health < 40:
             move = self.move_to_food(self.grid_data[1])
             if move:
@@ -52,6 +53,7 @@ class State_Attack():
             #NOTE FIND TAIL MODE
             if move:
                 return move
+                # There should ALWAYS be a move since move_to_food has all the guards
             else:
                 neighbours = self.helper.get_neighbors((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
                 if neighbours:

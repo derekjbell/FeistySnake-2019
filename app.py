@@ -19,10 +19,11 @@ app = Flask(__name__) #App is now an instance of Flask.
 
 @app.route("/start", methods=["POST"])
 def start():
-    return jsonify( color = "#E0FFFF", secondary_color = "#000000", name = "FeistySnake", taunt = "Mess with Snekko, better run like hecko", head_type = "shades", tail_type = "freckled", head_url = "https://todaysmusings.files.wordpress.com/2008/05/raccoon.jpg?w=229&h=300")
+    return jsonify( color = "#800000", secondary_color = "#000000", name = "FeistySnake", taunt = "Mess with Snekko, better run like hecko", head_type = "shades", tail_type = "freckled", head_url = "https://todaysmusings.files.wordpress.com/2008/05/raccoon.jpg?w=229&h=300")
 
 @app.route("/move", methods=["POST"])
 def move():
+    start = timer()
     data = request.get_json()
 
     #NOTE grid_data[0] = move_grid // grid_data[1] = food_grid
@@ -38,7 +39,9 @@ def move():
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)
-
+    end = timer()
+    time = (end - start)
+    print("Currently using {}".format(time))
     #NOTE Return the move in the JSON object wrapper
     return jsonify( move = next_move )
 
