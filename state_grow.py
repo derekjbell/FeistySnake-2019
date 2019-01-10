@@ -27,7 +27,7 @@ class State_Grow():
         self.grid_data = grid_data
         self.data = data
 
-        move = move_to_food()
+        move = self.move_to_food()
 
         #NOTE FIND TAIL MODE
         # if self.my_snake_length > 3 and self.my_snake_health > 75 or move == None: #85
@@ -36,7 +36,7 @@ class State_Grow():
         if move:
             return move
         else:
-            move = chase_tail(self.my_snake_health == 100)
+            move = self.chase_tail(self.my_snake_health == 100)
             if move:
                 return move
             else:
