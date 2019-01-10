@@ -47,6 +47,8 @@ class State_Attack():
                     target_snake = snake.get("body")
 
                     target_position = self.get_target_position(target_snake)
+                    target_y = target_position[1]
+                    target_x = target_position[0]
                     old_val = grid_data[0][target_y][target_x]
                     grid_data[0][target_y][target_x] = 1;
                     target_move = self.move_to_food([target_position])
