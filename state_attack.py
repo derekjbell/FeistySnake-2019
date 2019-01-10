@@ -47,39 +47,50 @@ class State_Attack():
                     target_snake = snake.get("body")
 
                     target_position = self.get_target_position(target_snake)
-                    target_y = target_position[1]
-                    target_x = target_position[0]
-                    old_val = grid_data[0][target_y][target_x]
-                    grid_data[0][target_y][target_x] = 1;
-                    target_move = self.move_to_food([target_position])
-                    grid_data[0][target_y][target_x] = old_val;
-                    return target_move
-        else:
-            move = self.move_to_food(self.grid_data[1])
+                    if target_position:
+                        target_y = target_position[1]
+                        target_x = target_position[0]
 
-            #NOTE FIND TAIL MODE
-            if move:
-                return move
-                # There should ALWAYS be a move since move_to_food has all the guards
-            else:
-                neighbours = self.helper.get_neighbors((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-                if neighbours:
-                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
-                else:
-                    # All spots around the head are full, or are next to an opponents head
-                    neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-                    if neighbours:
-                        return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+                        old_val = grid_data[0][target_y][target_x]
+
+                        grid_data[0][target_y][target_x] = 1;
+
+                        target_move = self.move_to_food([target_position])
+
+                        grid_data[0][target_y][target_x] = old_val;
+
+                        return target_move
                     else:
-                        # Snake will almost certainly die
-                        return 'up'
+                        return self.helper.default_behaviour(grid_data[1], (self.head_x, self.head_y), grid_data[0], self.height, self.width)
+        else:
+            return self.helper.default_behaviour(grid_data[1], (self.head_x, self.head_y), grid_data[0], self.height, self.width)
+
+    # def get_target_position(self, target_snake):
+    #     delta_x = target_snake[0].get("x") - target_snake[1].get("x")
+    #     delta_y = target_snake[0].get("y") - target_snake[1].get("y")
+    #     target_x = 2*delta_x + target_snake[0].get("x")
+    #     target_y = 2*delta_y + target_snake[0].get("y")
+    #     return (target_x, target_y)
 
     def get_target_position(self, target_snake):
-        delta_x = target_snake[0].get("x") - target_snake[1].get("x")
-        delta_y = target_snake[0].get("y") - target_snake[1].get("y")
-        target_x = 2*delta_x + target_snake[0].get("x")
-        target_y = 2*delta_y + target_snake[0].get("y")
-        return (target_x, target_y)
+        available_moves = []
+        head_x = target_snake[0].get("x")
+        head_y = target_snake[0].get("y")
+
+        top = head_y - 1
+        bottom = head_y + 1
+        left = head_x - 1
+        right = head_x + 1
+
+        if top > 0 and self.grid_data[0][top][head_x] != 0:
+            available_moves.append((head_x, top))
+        if bottom < height and self.grid_data[0][bottom][head_x] != 0:
+            available_moves.append((head_x, bottom))
+        if left > 0 and self.grid_data[0][head_y][left] != 0:
+            available_moves.append((left, head_y))
+        if right < width and self.grid_data[0][head_y][right] != 0:
+            available_moves.append((right, head_y))
+        return available_moves[0]
 
     def path_to_head(self, snakes):
         current_minimum = float('inf')

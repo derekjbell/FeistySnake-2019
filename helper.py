@@ -60,6 +60,28 @@ class Helper():
 
         return current_max
 
+    def default_behaviour(self, food_grid, my_head, grid, height, width):
+        print("Using default behaviour")
+        move = self.move_to_food(food_grid)
+
+        #NOTE FIND TAIL MODE
+        if move:
+            return move
+            # There should ALWAYS be a move since move_to_food has all the guards
+        else:
+            neighbours = self.helper.get_neighbors(my_head, grid, height, width)
+            if neighbours:
+                return self.helper.get_move_letter(my_head, neighbours[0])
+            else:
+                # All spots around the head are full, or are next to an opponents head
+                neighbours = self.helper.get_last_resort(my_head, grid, height, width)
+                if neighbours:
+                    return self.helper.get_move_letter(my_head, neighbours[0])
+                else:
+                    # Snake will almost certainly die
+                    return 'up'
+
+
     def print_board(self, grid):
         for row in grid:
             for column in row:
