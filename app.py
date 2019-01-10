@@ -36,7 +36,7 @@ def move():
     attack = State_Attack()
     grow = State_Grow()
 
-    max_snake = get_max_snake_length(data)
+    max_snake = helper.get_max_snake_length(data)
 
     if(len(data.get("you").get("body")) > max_snake):
         state = attack #TODO determine when to change states
