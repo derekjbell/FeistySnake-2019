@@ -28,6 +28,7 @@ def move():
 
     #NOTE grid_data[0] = move_grid // grid_data[1] = food_grid
     setup_process = Setup()
+    helper = Helper()
     grid_data = setup_process.grid_setup(data) #(food, width, height, snakes, myID)
 
     # Game States
@@ -35,7 +36,12 @@ def move():
     attack = State_Attack()
     grow = State_Grow()
 
-    state = attack #TODO determine when to change states
+    max_snake = get_max_snake_length(data)
+
+    if(len(data.get("you").get("body")) > max_snake):
+        state = attack #TODO determine when to change states
+    else:
+        state = grow
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)

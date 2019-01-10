@@ -46,3 +46,16 @@ class Helper():
     def get_last_resort(self, node, lines, height, width):
         (x, y) = node #changed from x, y
         return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and (lines[ny][nx] == 1 or lines[ny][nx] == -1)]
+
+    def get_max_snake_length(self, data):
+        my_snake_id = data.get("you").get("id")
+        snakes = data.get("board").get("snakes")
+
+        current_max = 0
+
+        for snake in snakes:
+            if snake.get("id") != my_snake_id:
+                if len(snake.get("body")) > current_max:
+                    current_max = len(snake.get("body"))
+                    
+        return current_max
