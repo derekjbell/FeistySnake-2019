@@ -15,6 +15,7 @@ class State_Grow():
 
     def __init__(self):
         self.name = "grow state"
+        self.helper = Helper
 
     def get_move(self, grid_data, data):
         self.height = data.get("board").get("height")
