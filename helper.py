@@ -61,7 +61,8 @@ class Helper():
         return current_max
 
     def print_board(self, grid):
-        i, j = 0
+        i = 0
+        j = 0
         for row in grid:
             for column in grid:
                 print(grid[i][j])
