@@ -63,5 +63,6 @@ class Helper():
     def print_board(self, grid):
         for row in grid:
             for column in row:
-                print(column + " ",end='')
+                print(column,end='')
+                print(" ",end='')
             print("")
