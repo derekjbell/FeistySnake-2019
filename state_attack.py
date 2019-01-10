@@ -84,7 +84,10 @@ class State_Attack():
             available_moves.append((left, head_y))
         if right < self.width and self.grid_data[0][head_y][right] != 0:
             available_moves.append((right, head_y))
-        return available_moves[0]
+        if len(available_moves) > 0:
+            return available_moves[0]
+        else:
+            return None
 
     def path_to_head(self, snakes):
         current_minimum = float('inf')
