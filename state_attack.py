@@ -127,7 +127,7 @@ class State_Attack():
 
     def default_behaviour(self):
         print("Using default behaviour")
-        move = self.move_to_food(grid_data[1])
+        move = self.move_to_food(self.grid_data[1])
         #NOTE FIND TAIL MODE
         if move:
             return move
