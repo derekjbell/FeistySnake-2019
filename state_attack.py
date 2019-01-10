@@ -65,6 +65,7 @@ class State_Attack():
     #     target_y = 2*delta_y + target_snake[0].get("y")
     #     return (target_x, target_y)
 
+    # Return the first entry of possible danger squares around a snakes' head
     def get_target_position(self, target_snake):
         available_moves = []
         head_x = target_snake[0].get("x")
@@ -77,11 +78,11 @@ class State_Attack():
 
         if top > 0 and self.grid_data[0][top][head_x] != 0:
             available_moves.append((head_x, top))
-        if bottom < height and self.grid_data[0][bottom][head_x] != 0:
+        if bottom < self.height and self.grid_data[0][bottom][head_x] != 0:
             available_moves.append((head_x, bottom))
         if left > 0 and self.grid_data[0][head_y][left] != 0:
             available_moves.append((left, head_y))
-        if right < width and self.grid_data[0][head_y][right] != 0:
+        if right < self.width and self.grid_data[0][head_y][right] != 0:
             available_moves.append((right, head_y))
         return available_moves[0]
 
