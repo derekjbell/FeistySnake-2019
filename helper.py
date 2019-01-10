@@ -65,6 +65,6 @@ class Helper():
         j = 0
         for row in grid:
             for column in row:
-                print(column,endl='')
+                print(column,end='')
                 j+=1
             i+=1
