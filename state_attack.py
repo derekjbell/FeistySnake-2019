@@ -22,22 +22,14 @@ class State_Attack():
 
         snakes = data.get("board").get("snakes")
         head = (self.head_x, self.head_y)
+
         # find closest snake
         target_snake_id = self.path_to_head(snakes)
         self.helper.print_board(grid_data[0])
 
         # Guard to make sure our snake doesn't just starve
         if self.my_snake_health < 40:
-            move = self.move_to_food(self.grid_data[1])
-            if move:
-                return move
-            else:
-                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-                if neighbours:
-                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
-                else:
-                    # Snake will almost certainly die
-                    return 'up'
+            return self.default_behaviour()
 
         if target_snake_id:
             target_snake = None
@@ -48,6 +40,7 @@ class State_Attack():
 
                     target_position = self.get_target_position(target_snake)
                     if target_position:
+                        #If there is some point in the snakes' danger zone, go to it
                         target_y = target_position[1]
                         target_x = target_position[0]
 
@@ -61,9 +54,9 @@ class State_Attack():
 
                         return target_move
                     else:
-                        return self.helper.default_behaviour(grid_data[1], (self.head_x, self.head_y), grid_data[0], self.height, self.width)
+                        return self.default_behaviour()
         else:
-            return self.helper.default_behaviour(grid_data[1], (self.head_x, self.head_y), grid_data[0], self.height, self.width)
+            return self.default_behaviour()
 
     # def get_target_position(self, target_snake):
     #     delta_x = target_snake[0].get("x") - target_snake[1].get("x")
@@ -130,3 +123,23 @@ class State_Attack():
                 # Snake will almost certainly die
                 return 'up'
         return None
+
+    def default_behaviour(self):
+        print("Using default behaviour")
+        move = self.move_to_food(grid_data[1])
+        #NOTE FIND TAIL MODE
+        if move:
+            return move
+            # There should ALWAYS be a move since move_to_food has all the guards
+        else:
+            neighbours = self.helper.get_neighbors((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
+            if neighbours:
+                return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+            else:
+                # All spots around the head are full, or are next to an opponents head
+                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
+                if neighbours:
+                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+                else:
+                    # Snake will almost certainly die
+                    return 'up'
