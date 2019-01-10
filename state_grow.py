@@ -60,7 +60,7 @@ class State_Grow():
                     current_minimum = len(path)
                     current_path = path
         if current_path:
-            return Helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
+            return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         return None
 
     def chase_tail(self, isGonnaGrow):
@@ -72,9 +72,9 @@ class State_Grow():
             if not isGonnaGrow:
                 return get_move_letter((self.head_x, self.head_y), list(path)[1])
             else:
-                neighbours = Helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
+                neighbours = self.helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
                 for neighbour in neighbours:
                     path = self.pathfinder.compute_path(neighbour)
                     if path:
-                        return Helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
+                        return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
         return None
