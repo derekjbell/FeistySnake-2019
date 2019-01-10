@@ -57,5 +57,13 @@ class Helper():
             if snake.get("id") != my_snake_id:
                 if len(snake.get("body")) > current_max:
                     current_max = len(snake.get("body"))
-                    
+
         return current_max
+
+    def print_board(self, grid):
+        i, j = 0
+        for row in grid:
+            for column in grid:
+                print(grid[i][j])
+                j+=1
+            i+=1

@@ -24,6 +24,7 @@ class State_Attack():
         head = (self.head_x, self.head_y)
         # find closest snake
         target_snake_id = self.path_to_head(snakes)
+        self.helper.print_board(grid_data[0])
 
         # Guard to make sure our snake doesn't just starve
         if self.my_snake_health < 40:
@@ -89,6 +90,7 @@ class State_Attack():
                 current_id = snake.get("id")
         return current_id
 
+    # This needs to get changed to a uniquely named method, and altered to do less...
     def move_to_food(self, food_list):
         current_minimum = float('inf')
         current_path = None
