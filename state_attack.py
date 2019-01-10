@@ -47,7 +47,11 @@ class State_Attack():
                     target_snake = snake.get("body")
 
                     target_position = self.get_target_position(target_snake)
-                    return self.move_to_food([target_position])
+                    old_val = grid_data[0][target_y][target_x]
+                    grid_data[0][target_y][target_x] = 1;
+                    target_move = self.move_to_food([target_position])
+                    grid_data[0][target_y][target_x] = old_val;
+                    return target_move
         else:
             move = self.move_to_food(self.grid_data[1])
 
@@ -97,6 +101,7 @@ class State_Attack():
         for food in food_list:
             path = self.pathfinder.compute_path(tuple(food))
             if path:
+                print(path)
                 path = list(path)
                 if len(path) < current_minimum:
                     current_minimum = len(path)
