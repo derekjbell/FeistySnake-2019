@@ -53,7 +53,7 @@ class State_Grow():
         current_minimum = float('inf')
         current_path = None
         for food in food_list:
-            path = self.pathfinder.compute_path((self.head_x, self.head_y), tuple(food))
+            path = self.pathfinder.compute_path(tuple(food))
             if path:
                 path = list(path)
                 if len(path) < current_minimum:
@@ -66,7 +66,7 @@ class State_Grow():
     def chase_tail(self, isGonnaGrow):
         my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
         self.grid_data[0][my_tail[1]][my_tail[0]] = 1
-        path = self.pathfinder.compute_path((self.head_x, self.head_y), my_tail)
+        path = self.pathfinder.compute_path(my_tail)
         self.grid_data[0][my_tail[1]][my_tail[0]] = 0
         if path:
             if not isGonnaGrow:
@@ -74,7 +74,7 @@ class State_Grow():
             else:
                 neighbours = Helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
                 for neighbour in neighbours:
-                    path = self.pathfinder.compute_path((self.head_x, self.head_y), neighbour)
+                    path = self.pathfinder.compute_path(neighbour)
                     if path:
                         return Helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
         return None
