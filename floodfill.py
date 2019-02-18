@@ -4,35 +4,29 @@ Duncan MacDonald - 2019
 Implementation of floodfill for the purpose of BattleSnake.
 '''
 
-
 from queue import Queue
 from helper import Helper
 
 class FloodFill():
 
-    def __init__(self, map, head, option1, option2, option3 = None):
+    def __init__(self, map):
 
         self.map = map[0]
         self.width = len(self.map[0])
         self.height = len(self.map)
+        self.used = {}
+        self.area1 = 0
+        self.area2 = 0
 
-        for y in range(0, self.height):
-            print('')
-            for x in range(0, self.width):
-                print(self.map[y][x], end="")
-        print("")
-
+    def calculate(self, option1, option2, option3 = None):
         self.used = {}
         self.false_map()
         self.area1 = self.fill(option1, self.map)
-        print("Area 1")
-        print(self.area1)
 
         self.used = {}
         self.false_map()
         self.area2 = self.fill(option2, self.map)
-        print("Area 2")
-        print(self.area2)
+        return (self.area1, self.area2)
 
     def false_map(self):
         for y in range(0, self.height):
@@ -86,12 +80,11 @@ if __name__=='__main__':
     op1 = (3, 0)
     op2 = (5, 0)
     head = (4, 0)
-    results = FloodFill(map, head, op1, op2)
-    move1 = results.area1
-    move2 = results.area2
-    if move1 > move2:
-        print(move1)
+    results = FloodFill(map)
+    move = results.calculate(op1, op2)
+    if move[0] > move[1]:
+        print(move)
         print("Make the first move!")
     else:
-        print(move2)
+        print(move)
         print("Make the second move!")
