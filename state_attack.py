@@ -23,9 +23,9 @@ class State_Attack():
         snakes = data.get("board").get("snakes")
         head = (self.head_x, self.head_y)
 
-        # find closest snake
-        target_snake_id = self.path_to_head(snakes)
-        self.helper.print_board(grid_data[0])
+        # find closest snake ID
+        target_snake_id = self.find_closest_snake_head(snakes)
+        # self.helper.print_board(grid_data[0])
 
         # Guard to make sure our snake doesn't just starve
         if self.my_snake_health < 40:
@@ -89,7 +89,7 @@ class State_Attack():
         else:
             return None
 
-    def path_to_head(self, snakes):
+    def find_closest_snake_head(self, snakes):
         current_minimum = float('inf')
         current_path = None
         current_id = None
@@ -121,7 +121,7 @@ class State_Attack():
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         else:
             return self.default_behaviour()
-move_to_food
+            
     def default_behaviour(self):
         print("Using default behaviour")
         move = self.move_to_food(self.grid_data[1])
