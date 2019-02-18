@@ -47,7 +47,7 @@ class Helper():
         print("Potential moves:")
         print(potential_moves)
         if len(potential_moves) > 0:
-            return self.sort_options_fill(potential_moves, lines).reverse()
+            return self.sort_options_fill(potential_moves, lines)
         else:
             return None
 
@@ -57,13 +57,14 @@ class Helper():
 
     def sort_options_fill(self, list, map):
         filler = floodfill.FloodFill([map,[]])
-        new_list = []
+        list_with_area = []
         for entry in list:
             new_entry = [entry, filler.calculate_one(entry)]
-            new_list.append(new_entry)
-        new_list.sort(key=lambda x: x[1])
-        for entry in new_list:
-            print(entry)
+            list_with_area.append(new_entry)
+        list_with_area.sort(key=lambda x: x[1])
+        return_list = [x for [x, y] in list_with_area]
+        return_list.reverse()
+        return return_list
 
     def get_max_snake_length(self, data):
         my_snake_id = data.get("you").get("id")
@@ -95,4 +96,4 @@ if __name__ == "__main__":
     op2 = (2, 0)
     op3 = (6, 0)
     new_list = [op1, op2, op3]
-    helper.sort_options_fill(new_list, grid)
+    print(helper.sort_options_fill(new_list, grid))
