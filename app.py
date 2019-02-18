@@ -55,5 +55,9 @@ def move():
 def end():
     return '', 200
 
+@app.route("/ping", methods=["POST"])
+def end():
+    return '', 200
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, use_reloader=True)
