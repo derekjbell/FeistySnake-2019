@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
-import os, random, math
 from flask import Flask, request, jsonify
-from datetime import datetime
-from timeit import default_timer as timer
+import time
 
 from setup import Setup
 from helper import Helper
@@ -23,7 +21,7 @@ def start():
 
 @app.route("/move", methods=["POST"])
 def move():
-    start = timer()
+    tic = time()
     data = request.get_json()
 
     #NOTE grid_data[0] = move_grid // grid_data[1] = food_grid
@@ -45,9 +43,11 @@ def move():
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)
-    end = timer()
-    time = (end - start)
-    print("Currently using {}".format(time))
+    toc = time()
+    
+    print("")
+    print("Time used: {}".format((toc - tic)))
+    print("")
     #NOTE Return the move in the JSON object wrapper
     return jsonify( move = next_move )
 
