@@ -21,7 +21,7 @@ def start():
 
 @app.route("/move", methods=["POST"])
 def move():
-    tic = time()
+    tic = time.time()
     data = request.get_json()
 
     #NOTE grid_data[0] = move_grid // grid_data[1] = food_grid
@@ -43,8 +43,8 @@ def move():
 
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)
-    toc = time()
-    
+    toc = time.time()
+
     print("")
     print("Time used: {}".format((toc - tic)))
     print("")
