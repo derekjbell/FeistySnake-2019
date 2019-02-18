@@ -4,6 +4,7 @@ class Setup():
 
     #NOTE performs grid setup for each move
     def grid_setup(self, data):
+        # Squares with 1 are open, squares with 0 are no-go, squares with -1 are danger
 
         # Get the information held in the data object
         food = data.get("board").get("food")
@@ -41,6 +42,7 @@ class Setup():
                 left = head_x - 1
                 right = head_x + 1
 
+                # Sets up "Danger Squares" around foe snake heads
                 if top > 0 and move_grid[top][head_x] != 0:
                     move_grid[top][head_x] = -1
                 if bottom < height and move_grid[bottom][head_x] != 0:
