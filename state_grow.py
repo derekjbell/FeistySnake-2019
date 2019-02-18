@@ -71,7 +71,7 @@ class State_Grow():
         self.grid_data[0][my_tail[1]][my_tail[0]] = 0
         if path:
             if not isGonnaGrow:
-                return get_move_letter((self.head_x, self.head_y), list(path)[1])
+                return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
             else:
                 neighbours = self.helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
                 for neighbour in neighbours:
