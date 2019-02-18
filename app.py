@@ -56,7 +56,7 @@ def end():
     return '', 200
 
 @app.route("/ping", methods=["POST"])
-def end():
+def ping():
     return '', 200
 
 if __name__ == "__main__":
