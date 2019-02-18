@@ -43,8 +43,6 @@ class FloodFill():
         count = 0
         q = Queue(maxsize=400)
         curr = start
-        if len(self.get_neighbours(curr)) < 2:
-            return 0
         q.put(curr)
         self.used[curr] = True
         count += 1
