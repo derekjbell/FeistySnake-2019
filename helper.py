@@ -1,4 +1,5 @@
 import math
+import floodfill
 
 class Helper():
 
@@ -41,11 +42,22 @@ class Helper():
 
     def get_neighbors(self, node, lines, height, width):
         (x, y) = node #changed from x, y
-        return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
+        # return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
+        return self.sort_options_fill([(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1], lines).reverse()
 
     def get_last_resort(self, node, lines, height, width):
         (x, y) = node #changed from x, y
         return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and (lines[ny][nx] == 1 or lines[ny][nx] == -1)]
+
+    def sort_options_fill(self, list, map):
+        filler = floodfill.FloodFill([map,[]])
+        new_list = []
+        for entry in list:
+            new_entry = [entry, filler.calculate_one(entry)]
+            new_list.append(new_entry)
+        new_list.sort(key=lambda x: x[1])
+        for entry in new_list:
+            print(entry)
 
     def get_max_snake_length(self, data):
         my_snake_id = data.get("you").get("id")
@@ -66,3 +78,15 @@ class Helper():
                 print(column,end='')
                 print(" ",end='')
             print("")
+if __name__ == "__main__":
+    helper = Helper()
+    grid = [[1,0,1,1,0,1,1,1],
+            [1,0,1,1,0,1,1,1],
+            [1,0,1,0,0,1,1,1],
+            [1,0,1,0,1,1,0,1],
+            [1,0,1,0,1,1,0,0]]
+    op1 = (0, 0)
+    op2 = (2, 0)
+    op3 = (6, 0)
+    new_list = [op1, op2, op3]
+    helper.sort_options_fill(new_list, grid)

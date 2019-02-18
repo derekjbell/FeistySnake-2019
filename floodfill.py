@@ -5,7 +5,6 @@ Implementation of floodfill for the purpose of BattleSnake.
 '''
 
 from queue import Queue
-from helper import Helper
 
 class FloodFill():
 
@@ -27,6 +26,12 @@ class FloodFill():
         self.false_map()
         self.area2 = self.fill(option2, self.map)
         return (self.area1, self.area2)
+
+    def calculate_one(self, square):
+        self.used = {}
+        self.false_map()
+        area = self.fill(square, self.map)
+        return area
 
     def false_map(self):
         for y in range(0, self.height):
