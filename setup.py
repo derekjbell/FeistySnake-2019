@@ -41,13 +41,13 @@ class Setup():
                 left = head_x - 1
                 right = head_x + 1
 
-                if top > 0:
+                if top > 0 and move_grid[top][head_x] != 0:
                     move_grid[top][head_x] = -1
-                if bottom < height:
+                if bottom < height and move_grid[bottom][head_x] != 0:
                     move_grid[bottom][head_x] = -1
-                if left > 0:
+                if left > 0 and move_grid[head_y][left] != 0:
                     move_grid[head_y][left] = -1
-                if right < width:
+                if right < width and move_grid[head_y][right] != 0:
                     move_grid[head_y][right] = -1
 
             for point in body:
