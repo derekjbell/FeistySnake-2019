@@ -41,12 +41,16 @@ class State_Grow():
             if move:
                 return move
             else:
-                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), grid_data[0], self.height, self.width)
+                neighbours = self.helper.get_neighbors((self.head_x, self.head_y), grid_data[0], self.height, self.width)
                 if neighbours:
                     return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
                 else:
-                    # Snake will almost certainly die
-                    return 'up'
+                    neighbours = self.helper.get_last_resort((self.head_x, self.head_y), grid_data[0], self.height, self.width)
+                    if neighbours:
+                        return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+                    else:
+                        # Snake will almost certainly die
+                        return 'up'
 
 
     def move_to_food(self):

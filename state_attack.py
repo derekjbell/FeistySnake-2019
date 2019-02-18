@@ -120,14 +120,8 @@ class State_Attack():
             #TODO figure out how to stop two competing SNAKES from trying to take the same square
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         else:
-            neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-            if neighbours:
-                return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
-            else:
-                # Snake will almost certainly die
-                return 'up'
-        return None
-
+            return self.default_behaviour()
+move_to_food
     def default_behaviour(self):
         print("Using default behaviour")
         move = self.move_to_food(self.grid_data[1])
