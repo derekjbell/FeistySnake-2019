@@ -38,7 +38,7 @@ class State_Attack():
                 if snake.get("id") == target_snake_id:
                     target_snake = snake.get("body")
 
-                    target_position = self.get_target_position(target_snake)
+                    target_position = self.get_danger_squares(target_snake)
                     if target_position:
                         #If there is some point in the snakes' danger zone, go to it
                         target_y = target_position[1]
@@ -58,7 +58,7 @@ class State_Attack():
         else:
             return self.default_behaviour()
 
-    # def get_target_position(self, target_snake):
+    # def get_danger_squares(self, target_snake):
     #     delta_x = target_snake[0].get("x") - target_snake[1].get("x")
     #     delta_y = target_snake[0].get("y") - target_snake[1].get("y")
     #     target_x = 2*delta_x + target_snake[0].get("x")
@@ -66,7 +66,7 @@ class State_Attack():
     #     return (target_x, target_y)
 
     # Return the first entry of possible danger squares around a snakes' head
-    def get_target_position(self, target_snake):
+    def get_danger_squares(self, target_snake):
         available_moves = []
         head_x = target_snake[0].get("x")
         head_y = target_snake[0].get("y")
