@@ -69,7 +69,7 @@ class FloodFill():
             y = neighbour[1]
 
             if x < self.width and x >= 0 and y < self.height and y >= 0 and not self.used[neighbour]:
-                if self.map[y][x] != 0:
+                if self.map[y][x] == 1:
                     inb.append(neighbour)
         return inb
 
