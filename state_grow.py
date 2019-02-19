@@ -27,6 +27,8 @@ class State_Grow():
         self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
         self.grid_data = grid_data
         self.data = data
+        print("WE ARE IN GROW STATE")
+        self.helper.print_board(self.grid_data[0])
 
         move = self.move_to_food()
 
