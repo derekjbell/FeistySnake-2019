@@ -31,7 +31,7 @@ class Setup():
         for snake in snakes:
             body = snake.get("body")
             snake_id = snake.get("id")
-            if snake_id != my_snake_id and len(body) > my_snake_length:
+            if snake_id != my_snake_id and len(body) >= my_snake_length:
                 # If snake is an enedata.get("you").get("body").get("data")[0].get("x")my, create a "Danger Zone" around the
                 # snake's head
                 head = body[0]
