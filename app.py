@@ -47,6 +47,7 @@ def move():
 
     print("")
     print("Time used: {}".format((toc - tic)))
+    print("State: {}".format(state.name))
     print("")
     #NOTE Return the move in the JSON object wrapper
     return jsonify( move = next_move )
