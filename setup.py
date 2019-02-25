@@ -31,6 +31,8 @@ class Setup():
         for snake in snakes:
             body = snake.get("body")
             snake_id = snake.get("id")
+
+            # Sets up the "danger zone" around a snake's head
             if snake_id != my_snake_id and len(body) >= my_snake_length:
                 # If snake is an enedata.get("you").get("body").get("data")[0].get("x")my, create a "Danger Zone" around the
                 # snake's head
@@ -53,8 +55,13 @@ class Setup():
                 if right < width and move_grid[head_y][right] != 0:
                     move_grid[head_y][right] = -1
 
+            # Changes every point of a snake to a 0 on the board aka a wall.
             for point in body:
                 move_grid[point.get("y")][point.get("x")] = 0
+
+            # Set the tail of a snake to a location that you can move to IF NECESSARY!
+            if snake.get("health") < 100:
+                move_grid[body[-1].get("y")][body[-1].get("x")] = -1
 
         grid_data = []
         grid_data.append(move_grid)
