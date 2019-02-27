@@ -19,6 +19,8 @@ class State_Attack():
         self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
         self.grid_data = grid_data
         self.data = data
+        print("WE ARE IN ATTACK STATE")
+        self.helper.print_board(grid_data[0])
 
         snakes = data.get("board").get("snakes")
         head = (self.head_x, self.head_y)
@@ -48,7 +50,6 @@ class State_Attack():
 
                         grid_data[0][target_y][target_x] = 1;
                         target_move = self.move_to_food([target_position])
-                        self.helper.print_board(grid_data[0])
 
                         grid_data[0][target_y][target_x] = old_val;
 
