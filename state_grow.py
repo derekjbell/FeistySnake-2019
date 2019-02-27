@@ -63,7 +63,7 @@ class State_Grow():
             path = self.pathfinder.compute_path(tuple(food))
             if path:
                 path = list(path)
-                if len(path) < current_minimum:
+                if len(path) < current_minimum and self.helper.is_good_move(path[1], self.grid_data[0], self.my_snake_length):
                     current_minimum = len(path)
                     current_path = path
         if current_path:
