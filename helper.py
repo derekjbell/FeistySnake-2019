@@ -8,8 +8,8 @@ class Helper():
 
     #NOTE returns a position tuple of closest food pellet
     def get_closest_food_crows(self, food_list, data):
-        head_x = data.get("you").get("body").get("data")[0].get("x")
-        head_y = data.get("you").get("body").get("data")[0].get("y")
+        head_x = data.get("you").get("body")[0].get("x")
+        head_y = data.get("you").get("body")[0].get("y")
 
         current_minimum = math.inf
         for pellet in food_list:
@@ -20,8 +20,8 @@ class Helper():
         return tuple(target_position)
 
     def get_closest_food_dist(self, food_list, data):
-        head_x = data.get("you").get("body").get("data")[0].get("x")
-        head_y = data.get("you").get("body").get("data")[0].get("y")
+        head_x = data.get("you").get("body")[0].get("x")
+        head_y = data.get("you").get("body")[0].get("y")
 
         current_minimum = math.inf
         for pellet in food_list:
