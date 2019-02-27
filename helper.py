@@ -86,6 +86,13 @@ class Helper():
 
         return current_max
 
+    def is_good_move(self, location, map, my_snake_length):
+        filler = floodfill.FloodFill([map,[]])
+        if filler.calculate_one(location) < my_snake_length:
+            return False
+        else
+            return True
+
     def print_board(self, grid):
         for row in grid:
             for column in row:
