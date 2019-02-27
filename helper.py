@@ -89,6 +89,7 @@ class Helper():
     def is_good_move(self, location, map, my_snake_length):
         filler = floodfill.FloodFill([map,[]])
         available_space = filler.calculate_one(location)
+        
         if available_space <= my_snake_length:
             print("Bad move:{} spaces available".format(available_space))
             return False

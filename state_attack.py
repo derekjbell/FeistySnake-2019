@@ -47,8 +47,8 @@ class State_Attack():
                         old_val = grid_data[0][target_y][target_x]
 
                         grid_data[0][target_y][target_x] = 1;
-
                         target_move = self.move_to_food([target_position])
+                        self.Helper.print_board(grid_data[0])
 
                         grid_data[0][target_y][target_x] = old_val;
 
