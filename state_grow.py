@@ -52,6 +52,7 @@ class State_Grow():
                         return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
                     else:
                         # Snake will almost certainly die
+                        print("NO MOVES AVAILABLE")
                         return 'up'
 
 
