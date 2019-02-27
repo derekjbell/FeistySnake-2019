@@ -25,7 +25,7 @@ class Helper():
 
         current_minimum = math.inf
         for pellet in food_list:
-            pellet_distance = get_crows_dist((head_x, head_y),pellet)
+            pellet_distance = self.get_crows_dist((head_x, head_y), pellet)
             if pellet_distance < current_minimum:
                 current_minimum = pellet_distance
         return current_minimum
