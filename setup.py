@@ -46,11 +46,11 @@ class Setup():
                 right = head_x + 1
 
                 # Sets up "Danger Squares" around foe snake heads
-                if top > 0 and move_grid[top][head_x] != 0:
+                if top >= 0 and move_grid[top][head_x] != 0:
                     move_grid[top][head_x] = -1
                 if bottom < height and move_grid[bottom][head_x] != 0:
                     move_grid[bottom][head_x] = -1
-                if left > 0 and move_grid[head_y][left] != 0:
+                if left >= 0 and move_grid[head_y][left] != 0:
                     move_grid[head_y][left] = -1
                 if right < width and move_grid[head_y][right] != 0:
                     move_grid[head_y][right] = -1
