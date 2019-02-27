@@ -90,7 +90,7 @@ class Helper():
         filler = floodfill.FloodFill([map,[]])
         if filler.calculate_one(location) < my_snake_length:
             return False
-        else
+        else:
             return True
 
     def print_board(self, grid):
