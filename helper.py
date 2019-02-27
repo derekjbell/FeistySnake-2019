@@ -102,9 +102,10 @@ class Helper():
             for column in row:
                 if column == 1:
                     print("O",end='')
+                elif column == -1:
+                    print("H",end='')
                 else:
                     print("X",end='')
-                    print(" ",end='')
             print("")
 
 if __name__ == "__main__":
