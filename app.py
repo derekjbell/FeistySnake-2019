@@ -41,7 +41,7 @@ def move():
 
     if(len(data.get("you").get("body")) > max_snake):
         state = attack #TODO determine when to change states
-    elif closest_food_distance < board_width / 2:
+    elif closest_food_distance < board_width / 2 or len(data.get("board").get("food")) > 5:
         state = grow
     else:
         state = defend
