@@ -116,7 +116,7 @@ class State_Attack():
                 if len(path) < current_minimum:
                     current_minimum = len(path)
                     current_path = path
-        if current_path and len(current_path) > 1 and helper.is_good_move(list(current_path)[1], self.grid_data[0], self.my_snake_length):
+        if current_path and len(current_path) > 1 and self.helper.is_good_move(list(current_path)[1], self.grid_data[0], self.my_snake_length):
             #TODO figure out how to stop two competing SNAKES from trying to take the same square
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         else:
