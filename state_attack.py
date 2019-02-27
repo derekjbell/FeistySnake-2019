@@ -27,7 +27,6 @@ class State_Attack():
 
         # find closest snake ID
         target_snake_id = self.find_closest_snake_head(snakes)
-        # self.helper.print_board(grid_data[0])
 
         # Guard to make sure our snake doesn't just starve
         if self.my_snake_health < 40:
