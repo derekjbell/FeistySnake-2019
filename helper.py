@@ -88,9 +88,12 @@ class Helper():
 
     def is_good_move(self, location, map, my_snake_length):
         filler = floodfill.FloodFill([map,[]])
-        if filler.calculate_one(location) < my_snake_length:
+        available_space = filler.calculate_one(location)
+        if available_space <= my_snake_length:
+            print("Bad move:{} spaces available".format(available_space))
             return False
         else:
+            print("Good move:{} spaces available".format(available_space))
             return True
 
     def print_board(self, grid):
@@ -99,6 +102,7 @@ class Helper():
                 print(column,end='')
                 print(" ",end='')
             print("")
+
 if __name__ == "__main__":
     helper = Helper()
     grid = [[1,0,1,1,0,1,1,1],
