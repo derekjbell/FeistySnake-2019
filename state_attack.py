@@ -19,8 +19,6 @@ class State_Attack():
         self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
         self.grid_data = grid_data
         self.data = data
-        print("WE ARE IN ATTACK STATE")
-        self.helper.print_board(grid_data[0])
 
         snakes = data.get("board").get("snakes")
         head = (self.head_x, self.head_y)
@@ -111,7 +109,6 @@ class State_Attack():
         for food in food_list:
             path = self.pathfinder.compute_path(tuple(food))
             if path:
-                print(path)
                 path = list(path)
                 if len(path) < current_minimum:
                     current_minimum = len(path)
@@ -133,7 +130,6 @@ class State_Attack():
                     return 'up'
 
     def default_behaviour(self):
-        print("Using default behaviour")
         move = self.move_to_food(self.grid_data[1])
         #NOTE FIND TAIL MODE
         if move:

@@ -27,8 +27,6 @@ class State_Grow():
         self.pathfinder = AStar((self.head_x, self.head_y), grid_data[0], self.width, self.height)
         self.grid_data = grid_data
         self.data = data
-        print("WE ARE IN GROW STATE")
-        self.helper.print_board(self.grid_data[0])
 
         move = self.move_to_food()
 
@@ -52,7 +50,6 @@ class State_Grow():
                         return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
                     else:
                         # Snake will almost certainly die
-                        print("NO MOVES AVAILABLE")
                         return 'up'
 
 
