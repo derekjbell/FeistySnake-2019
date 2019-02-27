@@ -46,7 +46,7 @@ def move():
     toc = time.time()
 
     print("")
-    print("Time used: {}".format((toc - tic)))
+    print("Time used: {}ms".format((toc - tic)*1000))
     print("State: {}".format(state.name))
     print("")
     #NOTE Return the move in the JSON object wrapper
