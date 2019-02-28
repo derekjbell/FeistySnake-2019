@@ -36,9 +36,11 @@ def move():
     grow = State_Grow()
 
     max_snake = helper.get_max_snake_length(data)
-
+    starttimedefend = time.time()
     closest_food_distance = helper.get_closest_food_dist(grid_data[1], data)
     board_width = data.get("board").get("width")
+    endtimedefend = time.time()
+    print(endtimedefend - starttimedefend)
 
     if(len(data.get("you").get("body")) > max_snake):
         state = attack #TODO determine when to change states
