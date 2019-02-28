@@ -54,7 +54,7 @@ class State_Grow():
                 if len(path) < current_minimum:
                     current_minimum = len(path)
                     current_path = path
-        if current_path and self.helper.is_good_move(curent_path[1], self.grid_data[0], self.my_snake_length):
+        if current_path and self.helper.is_good_move(current_path[1], self.grid_data[0], self.my_snake_length):
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         return None
 
