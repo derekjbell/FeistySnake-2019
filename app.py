@@ -53,7 +53,7 @@ def move():
     print("Move for round: {}".format(data.get("turn")))
     print("Time used: {}ms".format((toc - tic)*1000))
     print("State: {}".format(state.name))
-    helper.print_board(grid_data[0])
+    #helper.print_board(grid_data[0])
     #NOTE Return the move in the JSON object wrapper
     return jsonify( move = next_move )
 
