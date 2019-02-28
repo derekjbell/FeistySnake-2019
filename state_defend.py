@@ -1,5 +1,5 @@
 from astar import AStar
-from helper import Helper
+import helper
 
 class State_Defend():
 
@@ -59,7 +59,7 @@ class State_Defend():
         my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
         self.grid_data[0][my_tail[1]][my_tail[0]] = 1
         path = self.pathfinder.compute_path(my_tail)
-        self.grid_data[0][my_tail[1]][my_tail[0]] = 0
+        self.grid_data[0][my_tail[1]][my_tail[0]] = -1
         if path:
             if not snake_growing:
                 return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
@@ -69,4 +69,6 @@ class State_Defend():
                     path = self.pathfinder.compute_path(neighbour)
                     if path:
                         return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
-        return None
+        else:
+            # No square around our tail is free,
+            return None

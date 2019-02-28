@@ -95,14 +95,3 @@ class AStar():
                     heapq.heapify(openList)
         #NOTE No path was found, return none
         return None
-
-
-if __name__ == '__main__':
-    start = timer()
-    test_grid = [[1,0,1,1,1], [1,0,1,0,1], [1,0,1,0,1], [1,0,1,0,1], [1,1,1,0,1]]
-
-    #NOTE Usage is AStar(StartPointTuple, GridMatrix, HeightUnits, WidthUnits).computePath(EndPointTuple)
-    path = AStar((0,0), test_grid, 5, 5).computePath((4, 4))
-
-    print(path)
-    print("Time = {}".format(timer()-start))

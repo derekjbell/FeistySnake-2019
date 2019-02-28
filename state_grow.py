@@ -1,17 +1,7 @@
 from astar import AStar
-from helper import Helper
+import helper
 
 class State_Grow():
-
-    # width = data.get("width")
-    # height = data.get("height")
-    # food = data.get("food").get("data") #Array
-    # snakes = data.get("snakes").get("data") #Array
-    # you = data.get("you")
-    # myHealth = you.get("health")
-    # myLength = you.get("body").get("length")
-    # mySnake = you.get("body").get("data")
-    # myID = you.get("id")
 
     def __init__(self):
         self.name = "grow state"

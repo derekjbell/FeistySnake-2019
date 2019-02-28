@@ -1,4 +1,4 @@
-from helper import Helper
+import helper
 from astar import AStar
 import math
 
@@ -55,13 +55,6 @@ class State_Attack():
                         return self.default_behaviour()
         else:
             return self.default_behaviour()
-
-    # def get_danger_squares(self, target_snake):
-    #     delta_x = target_snake[0].get("x") - target_snake[1].get("x")
-    #     delta_y = target_snake[0].get("y") - target_snake[1].get("y")
-    #     target_x = 2*delta_x + target_snake[0].get("x")
-    #     target_y = 2*delta_y + target_snake[0].get("y")
-    #     return (target_x, target_y)
 
     # Return the first entry of possible danger squares around a snakes' head
     def get_danger_squares(self, target_snake):
