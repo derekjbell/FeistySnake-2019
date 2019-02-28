@@ -7,7 +7,7 @@ class State_Attack():
 
     def __init__(self):
         self.name = "attack state"
-        self.helper = Helper()
+        self.helper = None
 
     def get_move(self, grid_data, data):
         self.height = data.get("board").get("height")
