@@ -48,10 +48,10 @@ class State_Defend():
             path = self.pathfinder.compute_path(tuple(food))
             if path:
                 path = list(path)
-                if len(path) < current_minimum and self.helper.is_good_move(path[1], self.grid_data[0], self.my_snake_length):
+                if len(path) < current_minimum:
                     current_minimum = len(path)
                     current_path = path
-        if current_path:
+        if current_path and self.helper.is_good_move(current_path[1], self.grid_data[0], self.my_snake_length):
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         return None
 
