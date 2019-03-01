@@ -18,7 +18,7 @@ app = Flask(__name__) #App is now an instance of Flask.
 @app.route("/start", methods=["POST"])
 def start():
     print("-----START GAME-----")
-    return jsonify( color = "#FF69B4", secondary_color = "#000000", name = "FeistySnake", taunt = "Mess with Snekko, better run like hecko", head_type = "shades", tail_type = "freckled", head_url = "https://todaysmusings.files.wordpress.com/2008/05/raccoon.jpg?w=229&h=300")
+    return jsonify( color = "#FF69B4", name = "FeistySnake", headType = "shades", tailType = "freckled")
 
 @app.route("/move", methods=["POST"])
 def move():
