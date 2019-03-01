@@ -67,11 +67,11 @@ class State_Attack():
         left = head_x - 1
         right = head_x + 1
 
-        if top > 0 and self.grid_data[0][top][head_x] != 0:
+        if top >= 0 and self.grid_data[0][top][head_x] != 0:
             available_moves.append((head_x, top))
         if bottom < self.height and self.grid_data[0][bottom][head_x] != 0:
             available_moves.append((head_x, bottom))
-        if left > 0 and self.grid_data[0][head_y][left] != 0:
+        if left >= 0 and self.grid_data[0][head_y][left] != 0:
             available_moves.append((left, head_y))
         if right < self.width and self.grid_data[0][head_y][right] != 0:
             available_moves.append((right, head_y))
