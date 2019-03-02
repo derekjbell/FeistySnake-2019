@@ -54,17 +54,17 @@ class Helper():
         elif delta_y < 0:
             return 'up'
 
-    #NOTE checks squares returns list of possible moves
+    #NOTE checks node and checks the surrounding squares if they are safe or dangerous, and returns safe
     def get_neighbors(self, node, lines, height, width):
         (x, y) = node #changed from x, y
+        # return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
         potential_moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
         if len(potential_moves) > 0:
             return self.sort_options_fill(potential_moves, lines)
         else:
             return None
 
-
-    #NOTE
+    #NOTE floodfills 4 squares around our snakes head and chooses option with most movement possibilities
     def sort_options_fill(self, list, map):
         filler = floodfill.FloodFill([map,[]])
         list_with_area = []
@@ -76,6 +76,7 @@ class Helper():
         return_list.reverse()
         return return_list
 
+    #NOTE sort through snakes in game and return the longest snake value for comparison
     def get_max_snake_length(self, data):
         my_snake_id = data.get("you").get("id")
         snakes = data.get("board").get("snakes")
@@ -89,6 +90,7 @@ class Helper():
 
         return current_max
 
+    #NOTE calls floodfill and checks if the next move has space available for our snake's current length
     def is_good_move(self, location, map, my_snake_length):
         filler = floodfill.FloodFill([map,[]])
         available_space = filler.calculate_one(location)
@@ -98,6 +100,7 @@ class Helper():
         else:
             return True
 
+    #NOTE prints game board
     def print_board(self, grid):
         for row in grid:
             for column in row:
