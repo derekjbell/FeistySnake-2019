@@ -54,6 +54,7 @@ class Helper():
         elif delta_y < 0:
             return 'up'
 
+    #NOTE checks squares returns list of possible moves
     def get_neighbors(self, node, lines, height, width):
         (x, y) = node #changed from x, y
         potential_moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
@@ -62,28 +63,8 @@ class Helper():
         else:
             return None
 
-    def get_last_resort(self, node, lines, height, width):
-        (x, y) = node #changed from x, y
-        # return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
-        potential_moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] != 0]
-        if len(potential_moves) > 0:
-            return self.sort_options_fill(potential_moves, lines)
-        else:
-            return None
 
-    def get_backup_move(self, node, lines, height, width):
-        (x, y) = node
-        safe_sqaures = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
-        danger_squares = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == -1]
-        if len(safe_sqaures) > 0:
-            return self.sort_options_fill(safe_sqaures, lines)
-        elif len(danger_squares) > 0:
-            return self.sort_options_fill(danger_squares, lines)
-        else:
-            return None
-
-
-
+    #NOTE
     def sort_options_fill(self, list, map):
         filler = floodfill.FloodFill([map,[]])
         list_with_area = []
