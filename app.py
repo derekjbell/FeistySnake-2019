@@ -40,7 +40,7 @@ def move():
     attack.helper = helper
     grow.helper = helper
 
-    self.helper.print_board(grid_data[0])
+    helper.print_board(grid_data[0])
 
     max_snake = helper.get_max_snake_length(data)
 
