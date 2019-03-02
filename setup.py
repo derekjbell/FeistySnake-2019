@@ -46,7 +46,7 @@ class Setup():
             snake_id = snake.get("id")
 
             # Sets up the "danger zone" around a snake's head
-            if snake_id != my_snake_id and len(body) >= my_snake_length:
+            if snake_id != my_snake_id and len(body) >= my_snake_length or (len(body) == my_snake_length - 1 and snake.get("health") == 100):
                 # If snake is an enedata.get("you").get("body").get("data")[0].get("x")my, create a "Danger Zone" around the
                 # snake's head
                 head = body[0]
