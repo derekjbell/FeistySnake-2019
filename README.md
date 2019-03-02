@@ -9,3 +9,9 @@ To run this AI:
   2. Fork this repo, and link your Heroku project to it and enable automatic deploys
   3. Aim the BattleSnake engine at the Heroku app's URL
   4. Create games on the Battlsnake enginer for it to play
+
+Created by:
+
+Tristan Giles
+Duncan MacDonald
+Derek Bell
