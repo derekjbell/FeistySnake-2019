@@ -50,6 +50,7 @@ class AStar():
         (x, y) = node
         return_list = []
         for (dx, dy) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+            print(dx, dy)
             if 0 <= dx < self.width and 0 <= dy < self.height and self.grid[dy][dx] == 1:
                 return_list.append((dx,dy))
         return return_list
