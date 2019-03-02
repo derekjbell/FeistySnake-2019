@@ -56,7 +56,6 @@ class Helper():
 
     def get_neighbors(self, node, lines, height, width):
         (x, y) = node #changed from x, y
-        # return[(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
         potential_moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
         if len(potential_moves) > 0:
             return self.sort_options_fill(potential_moves, lines)
