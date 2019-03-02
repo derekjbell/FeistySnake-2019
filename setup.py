@@ -1,6 +1,8 @@
+import helper
 class Setup():
     def __init__(self):
         self.name = "Setup Functions"
+        self.helper = Helper()
 
     #NOTE performs grid setup for each move
     def grid_setup(self, data):
@@ -13,6 +15,7 @@ class Setup():
         snakes = data.get("board").get("snakes")
         my_snake_id = data.get("you").get("id")
         my_snake_length = len(data.get("you").get("body"))
+        my_snake_head = (data.get("you").get("body")[0].get("x"), data.get("you").get("body")[0].get("y"))
 
         # Holds information about the map and where the snake can move
         move_grid = []
@@ -23,9 +26,18 @@ class Setup():
             move_grid.append(new_row)
 
         # Creates a list of all food locations on the grid
-        food_grid = []
-        for point in food:
-            food_grid.append([point.get("x"), point.get("y")])
+
+        unsorted_food_list = []
+        for pellet in food:
+            new_entry = [pellet, self.helper.get_crows_dist(pellet, my_snake_head)]
+            unsorted_food_list.append(new_entry)
+        unsorted_food_list.sort(key=lambda x: x[1])
+        food_grid = [x for [x, y] in unsorted_food_list]
+        food_grid=return_list[0:6]
+
+        # food_grid = []
+        # for point in food:
+        #     food_grid.append([point.get("x"), point.get("y")])
 
         #Snake locations:
         for snake in snakes:
