@@ -19,6 +19,7 @@ class Helper():
                 target_position = pellet
         return tuple(target_position)
 
+    #NOTE calculates the closest pellet of food and returns the shortest path
     def get_closest_food_dist(self, food_list, data):
         head_x = data.get("you").get("body")[0].get("x")
         head_y = data.get("you").get("body")[0].get("y")
@@ -30,11 +31,13 @@ class Helper():
                 current_minimum = pellet_distance
         return current_minimum
 
+    #NOTE determines approximate distance between 2 points
     def get_crows_dist(self, start, end):
         (x1, y1) = start
         (x2, y2) = end
         return abs(math.hypot(x2 - x1, y2 - y1))
 
+    #NOTE returns movement JSON
     def get_move_letter(self, start, end):
         current_x = start[0]
         current_y = start[1]
