@@ -29,7 +29,7 @@ class Setup():
 
         unsorted_food_list = []
         for pellet in food:
-            new_entry = [pellet, self.helper.get_crows_dist(pellet, my_snake_head)]
+            new_entry = [pellet, self.helper.get_crows_dist((pellet.get("x"), pellet.get("y")), my_snake_head)]
             unsorted_food_list.append(new_entry)
         unsorted_food_list.sort(key=lambda x: x[1])
         food_grid = [x for [x, y] in unsorted_food_list]
