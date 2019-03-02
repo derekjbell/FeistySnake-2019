@@ -31,30 +31,48 @@ class State_Attack():
             return self.default_behaviour()
 
         if target_snake_id:
-            target_snake = None
-            # Find target snake data
-            for snake in snakes:
-                if snake.get("id") == target_snake_id:
-                    target_snake = snake.get("body")
-
-                    target_position = self.get_danger_squares(target_snake)
-                    if target_position:
-                        #If there is some point in the snakes' danger zone, go to it
-                        target_y = target_position[1]
-                        target_x = target_position[0]
-
-                        old_val = grid_data[0][target_y][target_x]
-
-                        grid_data[0][target_y][target_x] = 1;
-                        target_move = self.move_to_food([target_position])
-
-                        grid_data[0][target_y][target_x] = old_val;
-
-                        return target_move
-                    else:
-                        return self.default_behaviour()
+            return self.attack_snake_head(snakes, target_snake_id)
         else:
             return self.default_behaviour()
+            
+    def find_closest_snake_head(self, snakes):
+        current_minimum = float('inf')
+        current_path = None
+        current_id = None
+        for snake in snakes:
+            if snake.get("id") == self.data.get("you").get("id"):
+                continue
+            enemy_head_x = snake.get("body")[0].get("x")
+            enemy_head_y = snake.get("body")[0].get("y")
+            dist = self.helper.get_crows_dist((self.head_x, self.head_y), (enemy_head_x, enemy_head_y))
+            if dist < current_minimum:
+                current_minimum = dist
+                current_id = snake.get("id")
+        return current_id
+
+    def attack_snake_head(self, snakes, target_id):
+        target_snake = None
+        # Find target snake data
+        for snake in snakes:
+            if snake.get("id") == target_id:
+                target_snake = snake.get("body")
+
+                target_position = self.get_danger_squares(target_snake)
+                if target_position:
+                    #If there is some point in the snakes' danger zone, go to it
+                    target_y = target_position[1]
+                    target_x = target_position[0]
+
+                    old_val = grid_data[0][target_y][target_x]
+
+                    grid_data[0][target_y][target_x] = 1;
+                    target_move = self.move_to_food([target_position])
+
+                    grid_data[0][target_y][target_x] = old_val;
+
+                    return target_move
+                else:
+                    return self.default_behaviour()
 
     # Return the first entry of possible danger squares around a snakes' head
     def get_danger_squares(self, target_snake):
@@ -79,21 +97,6 @@ class State_Attack():
             return available_moves[0]
         else:
             return None
-
-    def find_closest_snake_head(self, snakes):
-        current_minimum = float('inf')
-        current_path = None
-        current_id = None
-        for snake in snakes:
-            if snake.get("id") == self.data.get("you").get("id"):
-                continue
-            enemy_head_x = snake.get("body")[0].get("x")
-            enemy_head_y = snake.get("body")[0].get("y")
-            dist = self.helper.get_crows_dist((self.head_x, self.head_y), (enemy_head_x, enemy_head_y))
-            if dist < current_minimum:
-                current_minimum = dist
-                current_id = snake.get("id")
-        return current_id
 
     # This needs to get changed to a uniquely named method, and altered to do less...
     def move_to_food(self, food_list):
