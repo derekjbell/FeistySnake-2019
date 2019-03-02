@@ -48,8 +48,11 @@ class AStar():
     def get_node_neighbours(self, node):
         #NOTE Get's the 4 grid neighbours of the node (Change here if you want diagonal action too)
         (x, y) = node
-        print(node)
-        return [(dx, dy) for (dx, dy) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)] if 0 <= dx < self.width and 0 <= dy < self.height and self.grid[dy][dx] == 1]
+        return_list = []
+        for (dx, dy) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+            if 0 <= dx < self.width and 0 <= dy < self.height and self.grid[dy][dx] == 1:
+                return_list.append((dx,dy))
+        return return_list
 
     def get_path(self, endPoint):
         current = endPoint
