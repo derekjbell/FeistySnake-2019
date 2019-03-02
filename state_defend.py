@@ -47,7 +47,6 @@ class State_Defend():
                     current_path = path
         if current_path and self.helper.is_good_move(current_path[1], self.grid_data[0], self.my_snake_length):
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
-        return None
 
     def chase_tail(self, snake_growing):
         my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
@@ -66,9 +65,6 @@ class State_Defend():
                         path = self.pathfinder.compute_path(neighbour)
                         if path:
                             return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
-        else:
-            # No square around our tail is free,
-            return None
 
     def tail_is_in_danger(self):
         my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))

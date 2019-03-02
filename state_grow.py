@@ -51,7 +51,6 @@ class State_Grow():
                     current_path = path
         if current_path and self.helper.is_good_move(current_path[1], self.grid_data[0], self.my_snake_length):
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
-        return None
 
     def chase_tail(self, isGonnaGrow):
         my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
@@ -59,12 +58,13 @@ class State_Grow():
         path = self.pathfinder.compute_path(my_tail)
         self.grid_data[0][my_tail[1]][my_tail[0]] = 0
         if path:
-            if not isGonnaGrow:
-                return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
-            else:
-                neighbours = self.helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
-                for neighbour in neighbours:
-                    path = self.pathfinder.compute_path(neighbour)
-                    if path:
-                        return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
-        return None
+            danger_tail_move = (path[1] == (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y")) and self.tail_is_in_danger())
+            if not danger_tail_move:
+                if not isGonnaGrow:
+                    return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
+                else:
+                    neighbours = self.helper.get_neighbors(my_tail, self.grid_data[0], self.height, self.width)
+                    for neighbour in neighbours:
+                        path = self.pathfinder.compute_path(neighbour)
+                        if path:
+                            return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
