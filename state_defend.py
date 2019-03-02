@@ -54,7 +54,8 @@ class State_Defend():
         self.grid_data[0][my_tail[1]][my_tail[0]] = 1
         path = self.pathfinder.compute_path(my_tail)
         self.grid_data[0][my_tail[1]][my_tail[0]] = -1
-        if path:
+        danger_tail_move = (path[1] == (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y")) and self.tail_is_in_danger())
+        if path and not danger_tail_move:
             if not snake_growing:
                 return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
             else:
@@ -66,3 +67,12 @@ class State_Defend():
         else:
             # No square around our tail is free,
             return None
+
+    def tail_is_in_danger(self):
+        my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
+        for snake in data.get("board").get("snakes"):
+            (x, y) = (snake.get("body")[0].get("x"), snake.get("body")[0].get("y"))
+            moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height]
+            if my_tail in moves:
+                return False
+        return True
