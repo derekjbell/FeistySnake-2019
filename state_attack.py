@@ -34,7 +34,7 @@ class State_Attack():
             return self.attack_snake_head(snakes, target_snake_id)
         else:
             return self.default_behaviour()
-            
+
     def find_closest_snake_head(self, snakes):
         current_minimum = float('inf')
         current_path = None
@@ -63,12 +63,12 @@ class State_Attack():
                     target_y = target_position[1]
                     target_x = target_position[0]
 
-                    old_val = grid_data[0][target_y][target_x]
+                    old_val = self.grid_data[0][target_y][target_x]
 
-                    grid_data[0][target_y][target_x] = 1;
+                    self.grid_data[0][target_y][target_x] = 1;
                     target_move = self.move_to_food([target_position])
 
-                    grid_data[0][target_y][target_x] = old_val;
+                    self.grid_data[0][target_y][target_x] = old_val;
 
                     return target_move
                 else:
