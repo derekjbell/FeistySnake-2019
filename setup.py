@@ -35,6 +35,8 @@ class Setup():
         unsorted_food_list.sort(key=lambda x: x[1])
         food_grid = [x for [x, y] in unsorted_food_list]
         food_grid=food_grid[0:6]
+        print(my_snake_head)
+        print(food_grid)
 
         # food_grid = []
         # for point in food:
