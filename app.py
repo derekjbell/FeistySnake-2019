@@ -40,8 +40,6 @@ def move():
     attack.helper = helper
     grow.helper = helper
 
-    #helper.print_board(grid_data[0])
-
     max_snake = helper.get_max_snake_length(data)
 
     closest_food_distance = helper.get_closest_food_dist(grid_data[1], data)
@@ -62,9 +60,9 @@ def move():
     next_move = state.get_move(grid_data, data)
     toc = time.time()
 
-    print("Move for round: {}".format(data.get("turn")))
-    print("Time used: {}ms".format((toc - tic)*1000))
-    print("State: {}".format(state.name))
+    # print("Move for round: {}".format(data.get("turn")))
+    # print("Time used: {}ms".format((toc - tic)*1000))
+    # print("State: {}".format(state.name))
     #helper.print_board(grid_data[0])
     #NOTE Return the move in the JSON object wrapper
     return jsonify( move = next_move )
