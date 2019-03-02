@@ -84,6 +84,8 @@ class Helper():
             new_entry = [entry, filler.calculate_one(entry)]
             list_with_area.append(new_entry)
         list_with_area.sort(key=lambda x: x[1])
+        print("SORTING FILL")
+        print(list_with_area)
         return_list = [x for [x, y] in list_with_area]
         return_list.reverse()
         return return_list
