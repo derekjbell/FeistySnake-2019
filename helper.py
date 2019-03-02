@@ -63,6 +63,17 @@ class Helper():
         else:
             return None
 
+    def get_backup_move(self, node, lines, height, width):
+        (x, y) = node #changed from x, y
+        save_moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == 1]
+        danger_moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height and lines[ny][nx] == -1]
+        if len(save_moves) > 0:
+            return self.sort_options_fill(save_moves, lines)
+        elif len(danger_moves) > 0:
+            return self.sort_options_fill(danger_moves, lines)
+        else:
+            return None
+
 
     #NOTE
     def sort_options_fill(self, list, map):
