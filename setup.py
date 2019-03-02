@@ -2,7 +2,7 @@ import helper
 class Setup():
     def __init__(self):
         self.name = "Setup Functions"
-        self.helper = Helper()
+        self.helper = helper.Helper()
 
     #NOTE performs grid setup for each move
     def grid_setup(self, data):
