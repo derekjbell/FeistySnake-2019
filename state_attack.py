@@ -110,17 +110,11 @@ class State_Attack():
             #TODO figure out how to stop two competing SNAKES from trying to take the same square
             return self.helper.get_move_letter((self.head_x, self.head_y), list(current_path)[1])
         else:
-            neighbours = self.helper.get_neighbors((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-            if neighbours:
-                return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+            backup_moves = self.helper.get_backup_move((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
+            if backup_moves:
+                return self.helper.get_move_letter((self.head_x, self.head_y), backup_moves[0])
             else:
-                # All spots around the head are full, or are next to an opponents head
-                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-                if neighbours:
-                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
-                else:
-                    # Snake will almost certainly die
-                    return 'up'
+                return 'up'
 
     def default_behaviour(self):
         move = self.move_to_food(self.grid_data[1])
@@ -133,10 +127,8 @@ class State_Attack():
             if neighbours:
                 return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
             else:
-                # All spots around the head are full, or are next to an opponents head
-                neighbours = self.helper.get_last_resort((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
-                if neighbours:
-                    return self.helper.get_move_letter((self.head_x, self.head_y), neighbours[0])
+                backup_moves = self.helper.get_backup_move((self.head_x, self.head_y), self.grid_data[0], self.height, self.width)
+                if backup_moves:
+                    return self.helper.get_move_letter((self.head_x, self.head_y), backup_moves[0])
                 else:
-                    # Snake will almost certainly die
                     return 'up'

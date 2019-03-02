@@ -35,17 +35,23 @@ def move():
     attack = State_Attack()
     grow = State_Grow()
 
+    # Assign the global helper methods to each state
     defend.helper = helper
     attack.helper = helper
     grow.helper = helper
 
     max_snake = helper.get_max_snake_length(data)
+
     closest_food_distance = helper.get_closest_food_dist(grid_data[1], data)
+
     board_width = data.get("board").get("width")
 
-    if(len(data.get("you").get("body")) > max_snake):
-        state = attack #TODO determine when to change states
-    elif closest_food_distance < board_width / 1.5 or len(data.get("board").get("food")) > 5:
+    if len(data.get("you").get("body")) > max_snake + 1:
+        # Assign the attack state when we are 2 bigger than any other snake
+        state = attack
+    elif closest_food_distance < board_width / 1.5:
+        # Assign the grow state if a piece of food is within boardlen/1.5
+        # or if there are more than 5 pieces of food on the board
         state = grow
     else:
         state = defend
@@ -53,6 +59,7 @@ def move():
     #NOTE Get the next move based on the pellet
     next_move = state.get_move(grid_data, data)
     toc = time.time()
+    
     print("Move for round: {}".format(data.get("turn")))
     print("Time used: {}ms".format((toc - tic)*1000))
     print("State: {}".format(state.name))
