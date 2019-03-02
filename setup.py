@@ -33,7 +33,7 @@ class Setup():
             unsorted_food_list.append(new_entry)
         unsorted_food_list.sort(key=lambda x: x[1])
         food_grid = [x for [x, y] in unsorted_food_list]
-        food_grid=return_list[0:6]
+        food_grid=food_grid[0:6]
 
         # food_grid = []
         # for point in food:
