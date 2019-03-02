@@ -74,7 +74,7 @@ class State_Defend():
         my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
         for snake in self.data.get("board").get("snakes"):
             (x, y) = (snake.get("body")[0].get("x"), snake.get("body")[0].get("y"))
-            moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < width and 0 <= ny < height]
+            moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < self.width and 0 <= ny < self.height]
             if my_tail in moves:
                 return False
         return True
