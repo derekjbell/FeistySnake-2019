@@ -68,3 +68,12 @@ class State_Grow():
                         path = self.pathfinder.compute_path(neighbour)
                         if path:
                             return self.helper.get_move_letter((self.head_x, self.head_y), list(path)[1])
+
+    def tail_is_in_danger(self):
+        my_tail = (self.data.get("you").get("body")[-1].get("x"), self.data.get("you").get("body")[-1].get("y"))
+        for snake in self.data.get("board").get("snakes"):
+            (x, y) = (snake.get("body")[0].get("x"), snake.get("body")[0].get("y"))
+            moves = [(nx, ny) for nx, ny in[(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)] if 0 <= nx < self.width and 0 <= ny < self.height]
+            if my_tail in moves:
+                return True
+        return False
